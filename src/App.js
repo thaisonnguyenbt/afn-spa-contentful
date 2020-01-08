@@ -12,14 +12,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/recipes/" component={Recipes} />
-        <Route exact path="/recipes/:slug" component={RecipeDetail} />
-        <Route component={Error} />
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/recipes/" component={Recipes} />
+      <Route exact path="/recipes/:slug" component={RecipeDetail} />
+      <Route component={Error} />
+    </Switch>
   );
 }
 

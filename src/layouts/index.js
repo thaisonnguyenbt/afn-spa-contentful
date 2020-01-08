@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import base from './base.css'
 import clientlib from './clientlib.css'
 import all from './all.css'

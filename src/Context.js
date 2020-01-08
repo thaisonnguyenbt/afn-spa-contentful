@@ -31,23 +31,9 @@ export default class AfnProvider extends Component {
     try {
       let response = await Client.getEntry("7d8eJUvyb36K1F3XzV7nOl");
       console.log(response);
-
-      /*
-      let rooms = this.formatData(response.items);
-      let featuredRooms = rooms.filter(room => room.featured === true);
-      let maxPrice = Math.max(...rooms.map(item => item.price));
-      let maxSize = Math.max(...rooms.map(item => item.size));
-      this.setState({
-        rooms,
-        featuredRooms,
-        sortedRooms: rooms,
-        loading: false,
-        //
-        price: maxPrice,
-        maxPrice,
-        maxSize
-      });
-      */
+      let recipe = this.formatData(response);
+      console.log(recipe)
+      this.setState(recipe);
     } catch(error) {
       console.log(error)
     }
@@ -58,15 +44,14 @@ export default class AfnProvider extends Component {
     
   }
 
-  formatData(items) {
-    let tempItems = items.map(item => {
+  formatData(item) {
+    
       let id = item.sys.id;
       let images = item.fields.images.map(image => image.fields.file.url);
+      let plateAndServeImage = item.fields.plateAndServeImage.fields.file.url;
 
-      let room = { ...item.fields, images, id };
-      return room;
-    });
-    return tempItems;
+      let recipe = { ...item.fields, images, plateAndServeImage, id };
+      return recipe;
   }
   getRoom = slug => {
     let tempRooms = [...this.state.rooms];

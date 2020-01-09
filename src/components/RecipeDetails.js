@@ -20,25 +20,25 @@ export default class RecipeDetails extends Component {
                                         <span itemprop="name">Home</span>
                                         </a>
                                         <meta itemprop="position" content="1"/>
-                                    </li>
+                                    </li> > &nbsp;
                                     <li className="cmp-breadcrumb__item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                                         <a href="/en/recipes.html" className="cmp-breadcrumb__item-link" itemprop="item">
                                         <span itemprop="name">Recipes</span>
                                         </a>
                                         <meta itemprop="position" content="2"/>
-                                    </li>
+                                    </li> > &nbsp;
                                     <li className="cmp-breadcrumb__item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                                         <a href="/en/recipes/cuisine.html" className="cmp-breadcrumb__item-link" itemprop="item">
                                         <span itemprop="name">Cuisine</span>
                                         </a>
                                         <meta itemprop="position" content="3"/>
-                                    </li>
+                                    </li> > &nbsp;
                                     <li className="cmp-breadcrumb__item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                                         <a href="/en/recipes/cuisine/asian-desserts.html" className="cmp-breadcrumb__item-link" itemprop="item">
                                         <span itemprop="name">Asian Desserts | Learn To Cook Common Asian </span>
                                         </a>
                                         <meta itemprop="position" content="4"/>
-                                    </li>
+                                    </li> > &nbsp;
                                     <li className="cmp-breadcrumb__item cmp-breadcrumb__item--active" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
                                         <span itemprop="name">{recipe.title}</span>
                                         <meta itemprop="position" content="5"/>

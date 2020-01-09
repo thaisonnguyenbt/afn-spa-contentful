@@ -22,7 +22,7 @@ export default () => (
                                     </ul>
                                 </div>
                                 <div className={"m-navbar__logo"}>
-                                    <a href={"https://asianfoodnetwork.com/"}>
+                                    <a href={"/"}>
                                         <img src={"https://dev.asianfoodnetwork.com/content/dam/afn/global/en/common/logo/afn-logo-white.svg"} className={"lazyloaded"} alt={"Asian Food Network"} title={"Asian Food Network"}/>
                                     </a>
                                 </div>
@@ -98,45 +98,9 @@ export default () => (
                                 <div className={"m-navbar__menuList"}>
                                     <ul>
                                         <li className={"m-navbar__menuListItem -dropdown"}>
-                                            <button className={"m-menuListItem__button"}>
+                                            <a href="/recipes/123" className={"m-menuListItem__button"}>
                                             <span>Recipes</span>
-                                            <span className={"m-menuListItem__arrow"}></span>
-                                            </button>
-                                            <div className={"m-subMenu text-only"}>
-                                                <div data-carousel="sub-menu" className={"owl-carousel owl-theme owl-loaded owl-drag"}>
-                                                    <div className={"owl-stage-outer"}>
-                                                        <div className={"owl-stage"}>
-                                                            <div className={"owl-item active"} style={{width: '192px', 'margin-right': '10px;'}}>
-                                                                <a className={"m-subMenuItem -main"} href="/en/recipes.html">
-                                                                    <p className={"m-subMenuItem__label"}>All</p>
-                                                                </a>
-                                                            </div>
-                                                            <div className={"owl-item active"} style={{width: '192px', 'margin-right': '10px;'}}>
-                                                                <a className={"m-subMenuItem"} href="/en/recipes/cuisine.html">
-                                                                    <p className={"m-subMenuItem__label"}>Cuisine</p>
-                                                                </a>
-                                                            </div>
-                                                            <div className={"owl-item active"} style={{width: '192px', 'margin-right': '10px;'}}>
-                                                                <a className={"m-subMenuItem"} href="/en/recipes/ingredients.html">
-                                                                    <p className={"m-subMenuItem__label"}>Ingredients</p>
-                                                                </a>
-                                                            </div>
-                                                            <div className={"owl-item active"} style={{width: '192px', 'margin-right': '10px;'}}>
-                                                                <a className={"m-subMenuItem"} href="/en/recipes/time.html">
-                                                                    <p className={"m-subMenuItem__label"}>Time</p>
-                                                                </a>
-                                                            </div>
-                                                            <div className={"owl-item active"} style={{width: '192px', 'margin-right': '10px;'}}>
-                                                                <a className={"m-subMenuItem"} href="/en/recipes/difficulty.html">
-                                                                    <p className={"m-subMenuItem__label"}>Difficulty</p>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className={"owl-nav disabled"}><button type="button" role="presentation" className={"owl-prev disabled"}><span className={"icon-afn-navigate-left"}></span></button><button type="button" role="presentation" className={"owl-next disabled"}><span className={"icon-afn-navigate-right"}></span></button></div>
-                                                    <div className={"owl-dots disabled"}></div>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </li>
                                         <li className={"m-navbar__menuListItem "}>
                                             <a className={"m-menuListItem__link"} href="/en/how-to.html">How-To</a>

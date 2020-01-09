@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
+import { AfnContext } from "../Context";
+import IngredientTile from "./IngredientTile"
 
 export default class RecipeDetails extends Component {
+    static contextType = AfnContext;
     render() {
+        let recipe = this.context;
+        console.log(recipe.ingredients)
+
         return (
             <div className="container responsivegrid aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--10 aem-GridColumn--offset--default--1">
                 <div id="details-page-container" className="cmp-container">
@@ -34,55 +40,45 @@ export default class RecipeDetails extends Component {
                                         <meta itemprop="position" content="4"/>
                                     </li>
                                     <li className="cmp-breadcrumb__item cmp-breadcrumb__item--active" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                                        <span itemprop="name">Snow Fungus Dessert</span>
+                                        <span itemprop="name">{recipe.title}</span>
                                         <meta itemprop="position" content="5"/>
                                     </li>
                                 </ol>
                             </nav>
                         </div>
+
+
+
                         <div className="recipeingredients aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0">
                             <div className="col o-recipe__right desktop">
                                 <div className="m-sticky-container -sticky -active" data-sticky="sidebar">
-                                    <span className="col m-recipeDetailList" style="width: 472.25px;">
+                                    <span className="col m-recipeDetailList">
                                         <div className="cmp-title">
                                             <h3 className="cmp-title__text">Ingredients</h3>
                                         </div>
                                         <ul>
                                             <li className="m-recipeDetailList__item">
-                                                <strong>Serves 6 people</strong>
+                                                <strong>Serves {recipe.numOfPeopleToServe} people</strong>
                                             </li>
-                                            <li className="m-recipeDetailList__item">
-                                                <p>50 g dried snow fungus</p>
-                                            </li>
-                                            <li className="m-recipeDetailList__item">
-                                                <p>30 g dried longans <i>(rinsed)</i></p>
-                                            </li>
-                                            <li className="m-recipeDetailList__item">
-                                                <p>10 dried red dates<i> (pitted &amp; rinsed)</i></p>
-                                            </li>
-                                            <li className="m-recipeDetailList__item">
-                                                <p>30 pcs ginkgo nuts</p>
-                                            </li>
-                                            <li className="m-recipeDetailList__item">
-                                                <p>20 g goji berries <i>(rinsed)</i></p>
-                                            </li>
-                                            <li className="m-recipeDetailList__item">
-                                                <p>2 L water</p>
-                                            </li>
-                                            <li className="m-recipeDetailList__item">
-                                                <p>120 g rock sugar</p>
-                                            </li>
+                                            
+                                            {recipe.ingredients && recipe.ingredients.map(item => {
+                                                return <li className="m-recipeDetailList__item">
+                                                    <p>{item}</p>
+                                                </li>
+                                            })} 
                                         </ul>
                                     </span>
                                 </div>
                             </div>
                         </div>
+
+
                         <div className="recipeoverview aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--7 aem-GridColumn--offset--default--0">
                             <div className="o-recipe aem-Grid aem-Grid--12 aem-Grid--default--12">
                                 <div className="m-recipe-overview__hero">
                                     <div className="m-recipe-image__main">
                                         <div className="cmp-image" data-cmp-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image.jpg" data-title="Snow Fungus Dessert" itemscope="" itemtype="http://schema.org/ImageObject">
-                                            <img data-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image.jpg" className="cmp-image__image lazyloaded" itemprop="contentUrl" data-cmp-hook-image="image" alt="Snow Fungus Dessert" title="Snow Fungus Dessert" src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image.jpg"/>
+                                            <img data-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image.jpg" className="cmp-image__image lazyloaded" itemprop="contentUrl" data-cmp-hook-image="image" alt="Snow Fungus Dessert" title="Snow Fungus Dessert" src={recipe.images[0]}/>
                                         </div>
                                     </div>
                                     <div className="m-recipe-image__logo desktop">
@@ -96,14 +92,14 @@ export default class RecipeDetails extends Component {
                                                 <div className="m-recipe-image__logo -mobile">
                                                     <img src="https://asianfoodnetwork.com/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/common/afn-logo.png" alt="Asian Food Network" title="Asian Food Network"/>
                                                 </div>
-                                                <div className="m-recipe-info__creator">Recipe Courtesy of Asian Food Network</div>
+                                                <div className="m-recipe-info__creator">{recipe.recipeCreator}</div>
                                             </div>
                                             <div className="m-recipe-info__title">
                                                 <div className="cmp-title">
-                                                    <h2 className="cmp-title__text">Snow Fungus Dessert</h2>
+                                                    <h2 className="cmp-title__text">{recipe.title}</h2>
                                                 </div>
                                             </div>
-                                            <a className="m-ratings gigya-style-modern gigya-mac gigya-chrome" smooth-scroll="" scroll-current="true" href="#recipe-ratings-reviews-container" id="view-overall-recipe-ratings" data-rating="overall-ratings" rating-categoryid="afn_ratings_reviews_default_configuration" rating-ratingconfigid="afn_ratings_reviews_default_configuration" rating-streamid="L2NvbnRlbnQvYWZuL2dsb2JhbC9lbi9yZWNpcGVzL2N1aXNpbmUvYXNpYW4tZGVzc2VydHMvc25vdy1mdW5ndXMtZGVzc2VydC5odG1s" rating-container="view-overall-recipe-ratings" style="width: 493px;">
+                                            <a className="m-ratings gigya-style-modern gigya-mac gigya-chrome" smooth-scroll="" scroll-current="true" href="#recipe-ratings-reviews-container" id="view-overall-recipe-ratings" data-rating="overall-ratings" rating-categoryid="afn_ratings_reviews_default_configuration" rating-ratingconfigid="afn_ratings_reviews_default_configuration" rating-streamid="L2NvbnRlbnQvYWZuL2dsb2JhbC9lbi9yZWNpcGVzL2N1aXNpbmUvYXNpYW4tZGVzc2VydHMvc25vdy1mdW5ndXMtZGVzc2VydC5odG1s" rating-container="view-overall-recipe-ratings">
                                                 <div className="gig-rating gig-clr">
                                                     <div className="gig-stars-container">
                                                         <div className="gig-rating-topbar">
@@ -126,12 +122,8 @@ export default class RecipeDetails extends Component {
                                             </a>
                                             <div className="m-content__blurb -collapsed">
                                                 <div className="m-content__copy -full">
-                                                    <span>Snow fungus contains dietary fibers that helps to lower cholesterol in the foods that we eat but also control the sugar absorption. It basically acts like a filter for your body. It also makes you even more beautiful by replenishing the collagen that we need to make our skin nice and bouncy.</span>
+                                                    <span>{recipe.description}</span>
                                                     <button className="a-button -text" button-click="less-copy">Less</button>
-                                                </div>
-                                                <div className="m-content__copy -ellipsis">
-                                                    <span>Snow fungus contains dietary fibers that helps to lower cholesterol in the foods that we eat but also control the sugar absorption It basically acts like a filter for your body It also makes you...</span>
-                                                    <button className="a-button -text" button-click="more-copy">More</button>
                                                 </div>
                                             </div>
                                             <div className="m-recipe-info__options desktop m-save-bookmark">
@@ -141,7 +133,7 @@ export default class RecipeDetails extends Component {
                                                     <div></div>
                                                     <div></div>
                                                 </div>
-                                                <button className="a-button -withIcon" button-click="save-bookmark" bookmark-type="afn" bookmark-author="Asian Food Network" bookmark-category="recipe" bookmark-subcategory="default" bookmark-thumbnail="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image.jpg.transform/1280x853/img.png" bookmark-title="Snow Fungus Dessert" bookmark-url="/content/afn/global/en/recipes/cuisine/asian-desserts/snow-fungus-dessert.html" bookmark-categoryid="afn_ratings_reviews_default_configuration" bookmark-ratingconfigid="afn_ratings_reviews_default_configuration" bookmark-streamid="L2NvbnRlbnQvYWZuL2dsb2JhbC9lbi9yZWNpcGVzL2N1aXNpbmUvYXNpYW4tZGVzc2VydHMvc25vdy1mdW5ndXMtZGVzc2VydC5odG1s" data-endpoint="https://asianfoodnetwork.com/en/recipes/cuisine/asian-desserts/snow-fungus-dessert/_jcr_content/root/responsivegrid/container/recipeoverview.gigya.bookmark.exist.json?uid={USERID}&amp;streamid=L2NvbnRlbnQvYWZuL2dsb2JhbC9lbi9yZWNpcGVzL2N1aXNpbmUvYXNpYW4tZGVzc2VydHMvc25vdy1mdW5ndXMtZGVzc2VydC5odG1s">
+                                                <button className="a-button -withIcon" button-cl vick="save-bookmark" bookmark-type="afn" bookmark-author="Asian Food Network" bookmark-category="recipe" bookmark-subcategory="default" bookmark-thumbnail="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image.jpg.transform/1280x853/img.png" bookmark-title="Snow Fungus Dessert" bookmark-url="/content/afn/global/en/recipes/cuisine/asian-desserts/snow-fungus-dessert.html" bookmark-categoryid="afn_ratings_reviews_default_configuration" bookmark-ratingconfigid="afn_ratings_reviews_default_configuration" bookmark-streamid="L2NvbnRlbnQvYWZuL2dsb2JhbC9lbi9yZWNpcGVzL2N1aXNpbmUvYXNpYW4tZGVzc2VydHMvc25vdy1mdW5ndXMtZGVzc2VydC5odG1s" data-endpoint="https://asianfoodnetwork.com/en/recipes/cuisine/asian-desserts/snow-fungus-dessert/_jcr_content/root/responsivegrid/container/recipeoverview.gigya.bookmark.exist.json?uid={USERID}&amp;streamid=L2NvbnRlbnQvYWZuL2dsb2JhbC9lbi9yZWNpcGVzL2N1aXNpbmUvYXNpYW4tZGVzc2VydHMvc25vdy1mdW5ndXMtZGVzc2VydC5odG1s">
                                                     <span className="button__icon">
                                                         <svg className="a-afnIcon -bookmark -filled" role="img" viewBox="0 0 12 17">
                                                             <path d="M.5 0h11c.3 0 .5.2.5.5v15.4a.5.5 0 0 1-.8.4l-5-3.1a.5.5 0 0 0-.5 0l-5 3.1a.5.5 0 0 1-.7-.4V.5C0 .2.2 0 .5 0z" fill-rule="evenodd"></path>
@@ -162,74 +154,82 @@ export default class RecipeDetails extends Component {
                                         </div>
                                         <div className="m-icon-text desktop">
                                             <div className="row m-icon-text-list">
+                                                { recipe.healthy && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src="/content/dam/afn/global/en/food-icons/healthy.svg" alt="Healthy"/>
+                                                        <img src={require('../images/icons/healthy.svg')}  alt="Healthy" />
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>Healthy</span>
                                                     </div>
-                                                </div>
+                                                </div> }
+                                                { recipe.noAlcohol && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src="/content/dam/afn/global/en/food-icons/no-alcohol.svg" alt="No Alcohol"/>
+                                                        <img src={require('../images/icons/no-alcohol.svg')} alt="No Alcohol" />
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Alcohol</span>
                                                     </div>
-                                                </div>
+                                                </div> }
+                                                { recipe.noMilk && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src="/content/dam/afn/global/en/food-icons/no-milk.svg" alt="No Milk"/>
+                                                        <img src={require('../images/icons/no-milk.svg')} alt="No Milk" />
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Milk</span>
                                                     </div>
-                                                </div>
+                                                </div> }
+                                                { recipe.noPork && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src="/content/dam/afn/global/en/food-icons/no-pork.svg" alt="No Pork"/>
+                                                        <img src={require('../images/icons/no-pork.svg')} alt="No Pork" />
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Pork</span>
                                                     </div>
-                                                </div>
+                                                </div> }
                                             </div>
                                         </div>
                                         <div className="m-icon-text mobile-only">
                                             <div className="row active m-icon-text-list" data-list="teaser">
+                                                { recipe.healthy && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src="/content/dam/afn/global/en/food-icons/healthy.svg" alt="Healthy"/>
+                                                        <img src={require('../images/icons/healthy.svg')} alt="Healthy"/>
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>Healthy</span>
                                                     </div>
-                                                </div>
+                                                </div> }
+                                                { recipe.noAlcohol && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src="/content/dam/afn/global/en/food-icons/no-alcohol.svg" alt="No Alcohol"/>
+                                                        <img src={require('../images/icons/no-alcohol.svg')} alt="No Alcohol"/>
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Alcohol</span>
                                                     </div>
-                                                </div>
+                                                </div> }
+                                                { recipe.noMilk && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src="/content/dam/afn/global/en/food-icons/no-milk.svg" alt="No Milk"/>
+                                                        <img src={require('../images/icons/no-milk.svg')}  alt="No Milk"/>
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Milk</span>
                                                     </div>
-                                                </div>
+                                                </div> }
+                                                { recipe.noPork && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src="/content/dam/afn/global/en/food-icons/no-pork.svg" alt="No Pork"/>
+                                                        <img src={require('../images/icons/no-pork.svg')}  alt="No Pork"/>
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Pork</span>
                                                     </div>
-                                                </div>
+                                                </div> }
                                             </div>
                                         </div>
                                         <div className="m-recipe-overview__highlights desktop">
@@ -237,26 +237,26 @@ export default class RecipeDetails extends Component {
                                                 <div className="col">
                                                     <ul>
                                                         <li><label>Difficulty: </label>
-                                                            <span>Easy</span>
+                                                            <span> {recipe.difficulty}</span>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div className="col">
                                                     <ul>
-                                                        <li><label>Preparation: </label> <span>10 min</span>
+                                                        <li><label>Preparation: </label> <span>{recipe.preparationTime} min</span>
                                                         </li>
-                                                        <li><label>Cook: </label> <span>20 min</span>
+                                                        <li><label>Cook: </label> <span>{recipe.cookTime} min</span>
                                                         </li>
-                                                        <li><label>Clean up: </label> <span>10 min</span>
+                                                        <li><label>Clean up: </label> <span>{recipe.cleanTime} min</span>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div className="col">
                                                     <ul>
                                                         <li><label>Steps: </label>
-                                                            <span>3 steps</span>
+                                                            <span>{recipe.steps} steps</span>
                                                         </li>
-                                                        <li><span>7 Ingredients</span>
+                                                        <li><span>{recipe.numOfIngredients} Ingredients</span>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -267,23 +267,23 @@ export default class RecipeDetails extends Component {
                                                 <div className="col">
                                                     <ul>
                                                         <li><label>Difficulty: </label>
-                                                            <span>Easy</span>
+                                                            <span>{recipe.difficulty}</span>
                                                         </li>
                                                         <li><label>Steps: </label>
-                                                            <span>3 steps</span>
+                                                            <span>{recipe.steps} steps</span>
                                                         </li>
-                                                        <li><span>7 Ingredients</span>
+                                                        <li><span>{recipe.numOfIngredients} Ingredients</span>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div className="col">
                                                     <ul>
                                                         <li><label>Preparation: </label>
-                                                            <span>10 min</span>
+                                                            <span>{recipe.preparationTime} min</span>
                                                         </li>
-                                                        <li><label>Cook: </label> <span>20 min</span>
+                                                        <li><label>Cook: </label> <span>{recipe.cookTime} min</span>
                                                         </li>
-                                                        <li><label>Clean up: </label> <span>10 min</span>
+                                                        <li><label>Clean up: </label> <span>{recipe.cleanTime} min</span>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -295,20 +295,20 @@ export default class RecipeDetails extends Component {
                                                     <span>Share This Recipe:</span>
                                                 </div>
                                                 <div className="m-social-sharing__list" id="desktop1578471783767_gig_containerParent">
-                                                    <div className="m-social-sharing__icons" id="desktop1578471783767" gigid="showShareBarUI" style="visibility: visible;">
+                                                    <div className="m-social-sharing__icons" id="desktop1578471783767" gigid="showShareBarUI" >
                                                         <div className="gig-bar-container gig-share-bar-container">
                                                             <table cellspacing="0" cellpadding="0" role="presentation">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td style="vertical-align:middle; white-space:nowrap;zoom:1;">
+                                                                        <td>
                                                                             <div className="gig-button-container gig-button-container-count-none gig-button-container-facebook gig-button-container-facebook-count-none gig-share-button-container gig-button-container-horizontal">
                                                                                 <div className="gig-button gig-share-button gig-button-up gig-button-count-none" id="desktop1578471783767-reaction0" title="" alt="" onclick="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction0'].onClick()" onmouseover="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction0'].changeState('over')" onmouseout="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction0'].changeState('up')" tabindex="0" role="button">
                                                                                     <table cellpadding="0" cellspacing="0" role="presentation">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="desktop1578471783767-reaction0-left" aria-hidden="true"></td>
-                                                                                                <td id="desktop1578471783767-reaction0-icon" style="zoom:1;vertical-align:middle;text-align:left;background-repeat:repeat-x;">
-                                                                                                    <img id="desktop1578471783767-reaction0-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/facebook-default.svg" alt="" focusable="false"/>
+                                                                                                <td id="desktop1578471783767-reaction0-icon">
+                                                                                                    <img id="desktop1578471783767-reaction0-icon_img" src={require('../images/social-media/facebook-default.svg')} alt="" focusable="false"/>
                                                                                                 </td>
                                                                                                 <td id="desktop1578471783767-reaction0-right" aria-hidden="true"></td>
                                                                                             </tr>
@@ -317,14 +317,14 @@ export default class RecipeDetails extends Component {
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td style="vertical-align:middle; white-space:nowrap;zoom:1;">
+                                                                        <td>
                                                                             <div className="gig-button-container gig-button-container-count-none gig-button-container-twitter gig-button-container-twitter-count-none gig-share-button-container gig-button-container-horizontal">
                                                                                 <div className="gig-button gig-share-button gig-button-up gig-button-count-none" id="desktop1578471783767-reaction1" title="" alt="" onclick="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction1'].onClick()" onmouseover="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction1'].changeState('over')" onmouseout="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction1'].changeState('up')" tabindex="0" role="button">
                                                                                     <table cellpadding="0" cellspacing="0" role="presentation">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="desktop1578471783767-reaction1-left" aria-hidden="true"></td>
-                                                                                                <td id="desktop1578471783767-reaction1-icon" style="zoom:1;vertical-align:middle;text-align:left;background-repeat:repeat-x;"><img id="desktop1578471783767-reaction1-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/twitter-default.svg" alt="" focusable="false"/></td>
+                                                                                                <td id="desktop1578471783767-reaction1-icon"><img id="desktop1578471783767-reaction1-icon_img" src={require('../images/social-media/twitter-default.svg')} alt="" focusable="false"/></td>
                                                                                                 <td id="desktop1578471783767-reaction1-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -332,14 +332,14 @@ export default class RecipeDetails extends Component {
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td style="vertical-align:middle; white-space:nowrap;zoom:1;">
+                                                                        <td>
                                                                             <div className="gig-button-container gig-button-container-count-none gig-button-container-pinterest gig-button-container-pinterest-count-none gig-share-button-container gig-button-container-horizontal">
                                                                                 <div className="gig-button gig-share-button gig-button-up gig-button-count-none" id="desktop1578471783767-reaction2" title="" alt="" onclick="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction2'].onClick()" onmouseover="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction2'].changeState('over')" onmouseout="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction2'].changeState('up')" tabindex="0" role="button">
                                                                                     <table cellpadding="0" cellspacing="0" role="presentation">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="desktop1578471783767-reaction2-left" aria-hidden="true"></td>
-                                                                                                <td id="desktop1578471783767-reaction2-icon" style="zoom:1;vertical-align:middle;text-align:left;background-repeat:repeat-x;"><img id="desktop1578471783767-reaction2-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/pinterest-default.svg" alt="" focusable="false"/></td>
+                                                                                                <td id="desktop1578471783767-reaction2-icon" ><img id="desktop1578471783767-reaction2-icon_img" src={require('../images/social-media/pinterest-default.svg')}  alt="" focusable="false"/></td>
                                                                                                 <td id="desktop1578471783767-reaction2-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -347,14 +347,14 @@ export default class RecipeDetails extends Component {
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td style="vertical-align:middle; white-space:nowrap;zoom:1;">
+                                                                        <td>
                                                                             <div className="gig-button-container gig-button-container-count-none gig-button-container-whatsapp gig-button-container-whatsapp-count-none gig-share-button-container gig-button-container-horizontal">
                                                                                 <div className="gig-button gig-share-button gig-button-up gig-button-count-none" id="desktop1578471783767-reaction3" title="" alt="" onclick="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction3'].onClick()" onmouseover="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction3'].changeState('over')" onmouseout="gigya.services.socialize.plugins.reactions.instances['desktop1578471783767'].buttonInstances['desktop1578471783767-reaction3'].changeState('up')" tabindex="0" role="button">
                                                                                     <table cellpadding="0" cellspacing="0" role="presentation">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="desktop1578471783767-reaction3-left" aria-hidden="true"></td>
-                                                                                                <td id="desktop1578471783767-reaction3-icon" style="zoom:1;vertical-align:middle;text-align:left;background-repeat:repeat-x;"><img id="desktop1578471783767-reaction3-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/whatsapp-default.svg" alt="" focusable="false"/></td>
+                                                                                                <td id="desktop1578471783767-reaction3-icon" ><img id="desktop1578471783767-reaction3-icon_img" src={require('../images/social-media/whatsapp-default.svg')} alt="" focusable="false"/></td>
                                                                                                 <td id="desktop1578471783767-reaction3-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -413,19 +413,19 @@ export default class RecipeDetails extends Component {
                                                     <span>Share This Recipe:</span>
                                                 </div>
                                                 <div className="m-social-sharing__list" id="not-desktop1578471783767_gig_containerParent">
-                                                    <div className="m-social-sharing__icons" id="not-desktop1578471783767" gigid="showShareBarUI" style="visibility: visible;">
+                                                    <div className="m-social-sharing__icons" id="not-desktop1578471783767" gigid="showShareBarUI">
                                                         <div className="gig-bar-container gig-share-bar-container">
                                                             <table cellspacing="0" cellpadding="0" role="presentation">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td style="vertical-align:middle; white-space:nowrap;zoom:1;">
+                                                                        <td>
                                                                             <div className="gig-button-container gig-button-container-count-none gig-button-container-facebook gig-button-container-facebook-count-none gig-share-button-container gig-button-container-horizontal">
                                                                                 <div className="gig-button gig-share-button gig-button-up gig-button-count-none" id="not-desktop1578471783767-reaction0" title="" alt="" onclick="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction0'].onClick()" onmouseover="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction0'].changeState('over')" onmouseout="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction0'].changeState('up')" tabindex="0" role="button">
                                                                                     <table cellpadding="0" cellspacing="0" role="presentation">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="not-desktop1578471783767-reaction0-left" aria-hidden="true"></td>
-                                                                                                <td id="not-desktop1578471783767-reaction0-icon" style="zoom:1;vertical-align:middle;text-align:left;background-repeat:repeat-x;">
+                                                                                                <td id="not-desktop1578471783767-reaction0-icon" >
                                                                                                     <img id="not-desktop1578471783767-reaction0-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/facebook-default.svg" alt="" focusable="false"/>
                                                                                                 </td>
                                                                                                 <td id="not-desktop1578471783767-reaction0-right" aria-hidden="true"></td>
@@ -435,14 +435,14 @@ export default class RecipeDetails extends Component {
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td style="vertical-align:middle; white-space:nowrap;zoom:1;">
+                                                                        <td>
                                                                             <div className="gig-button-container gig-button-container-count-none gig-button-container-twitter gig-button-container-twitter-count-none gig-share-button-container gig-button-container-horizontal">
                                                                                 <div className="gig-button gig-share-button gig-button-up gig-button-count-none" id="not-desktop1578471783767-reaction1" title="" alt="" onclick="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction1'].onClick()" onmouseover="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction1'].changeState('over')" onmouseout="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction1'].changeState('up')" tabindex="0" role="button">
                                                                                     <table cellpadding="0" cellspacing="0" role="presentation">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="not-desktop1578471783767-reaction1-left" aria-hidden="true"></td>
-                                                                                                <td id="not-desktop1578471783767-reaction1-icon" style="zoom:1;vertical-align:middle;text-align:left;background-repeat:repeat-x;"><img id="not-desktop1578471783767-reaction1-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/twitter-default.svg" alt="" focusable="false"/></td>
+                                                                                                <td id="not-desktop1578471783767-reaction1-icon" ><img id="not-desktop1578471783767-reaction1-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/twitter-default.svg" alt="" focusable="false"/></td>
                                                                                                 <td id="not-desktop1578471783767-reaction1-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -450,14 +450,14 @@ export default class RecipeDetails extends Component {
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td style="vertical-align:middle; white-space:nowrap;zoom:1;">
+                                                                        <td>
                                                                             <div className="gig-button-container gig-button-container-count-none gig-button-container-pinterest gig-button-container-pinterest-count-none gig-share-button-container gig-button-container-horizontal">
                                                                                 <div className="gig-button gig-share-button gig-button-up gig-button-count-none" id="not-desktop1578471783767-reaction2" title="" alt="" onclick="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction2'].onClick()" onmouseover="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction2'].changeState('over')" onmouseout="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction2'].changeState('up')" tabindex="0" role="button">
                                                                                     <table cellpadding="0" cellspacing="0" role="presentation">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="not-desktop1578471783767-reaction2-left" aria-hidden="true"></td>
-                                                                                                <td id="not-desktop1578471783767-reaction2-icon" style="zoom:1;vertical-align:middle;text-align:left;background-repeat:repeat-x;"><img id="not-desktop1578471783767-reaction2-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/pinterest-default.svg" alt="" focusable="false"/></td>
+                                                                                                <td id="not-desktop1578471783767-reaction2-icon" ><img id="not-desktop1578471783767-reaction2-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/pinterest-default.svg" alt="" focusable="false"/></td>
                                                                                                 <td id="not-desktop1578471783767-reaction2-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -465,14 +465,14 @@ export default class RecipeDetails extends Component {
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td style="vertical-align:middle; white-space:nowrap;zoom:1;">
+                                                                        <td>
                                                                             <div className="gig-button-container gig-button-container-count-none gig-button-container-whatsapp gig-button-container-whatsapp-count-none gig-share-button-container gig-button-container-horizontal">
                                                                                 <div className="gig-button gig-share-button gig-button-up gig-button-count-none" id="not-desktop1578471783767-reaction3" title="" alt="" onclick="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction3'].onClick()" onmouseover="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction3'].changeState('over')" onmouseout="gigya.services.socialize.plugins.reactions.instances['not-desktop1578471783767'].buttonInstances['not-desktop1578471783767-reaction3'].changeState('up')" tabindex="0" role="button">
                                                                                     <table cellpadding="0" cellspacing="0" role="presentation">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="not-desktop1578471783767-reaction3-left" aria-hidden="true"></td>
-                                                                                                <td id="not-desktop1578471783767-reaction3-icon" style="zoom:1;vertical-align:middle;text-align:left;background-repeat:repeat-x;"><img id="not-desktop1578471783767-reaction3-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/whatsapp-default.svg" alt="" focusable="false"/></td>
+                                                                                                <td id="not-desktop1578471783767-reaction3-icon"><img id="not-desktop1578471783767-reaction3-icon_img" src="/etc.clientlibs/afn/clientlibs/clientlib-site/resources/images/social-media/whatsapp-default.svg" alt="" focusable="false"/></td>
                                                                                                 <td id="not-desktop1578471783767-reaction3-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -514,6 +514,9 @@ export default class RecipeDetails extends Component {
                             </div>
                             <br/>
                         </div>
+
+
+
                         <div className="recipesteps aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none    aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--7 aem-GridColumn--offset--default--0">
                             <section className="o-recipe-steps">
                                 <div className="o-ordered-listing">
@@ -522,69 +525,32 @@ export default class RecipeDetails extends Component {
                                     </div>
                                     <div className="cmp-text">
                                         <ol className="o-numbered-listing">
-                                            <li>
-                                                <div className="m-ordered-listing__item">
-                                                    <div className="m-ordered-listing__title">
-                                                        <div className="cmp-title">
-                                                            <h3 className="cmp-title__text">Rinse dry ingredients</h3>
+                                            {recipe.instructions && recipe.instructions.map((instruction, index) => {
+                                                return <>
+                                                    <li>
+                                                        <div className="m-ordered-listing__item">
+                                                            <div className="m-ordered-listing__title">
+                                                                <div className="cmp-title">
+                                                                    <h3 className="cmp-title__text">{instruction.name}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div className="m-ordered-listing__copy">
+                                                                <div className="cmp-text">
+                                                                    <ul>
+                                                                        {instruction.steps && instruction.steps.map(step => {
+                                                                            return <li>{step}</li>
+                                                                        })}
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div className="cmp-image" data-cmp-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_step2.jpg" data-title="Rinse dry ingredients" itemscope="" itemtype="http://schema.org/ImageObject">
+                                                                <img data-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_step2.jpg" className="cmp-image__image ls-is-cached lazyloaded" itemprop="contentUrl" data-cmp-hook-image="image" alt="Rinse dry ingredients" title="Rinse dry ingredients" src={recipe.images[index + 1]}/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="m-ordered-listing__copy">
-                                                        <div className="cmp-text">
-                                                            <ul>
-                                                                <li>Rinse the red dates, longans with clean water before using.</li>
-                                                                <li>Soak the dried snow fungus in warm water until soft and plump. Discard water and use scissors to cut snow fungus into smaller piecesand then trim off the yellowish crusty part at the bottom. Discard those.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div className="cmp-image" data-cmp-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_step2.jpg" data-title="Rinse dry ingredients" itemscope="" itemtype="http://schema.org/ImageObject">
-                                                        <img data-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_step2.jpg" className="cmp-image__image ls-is-cached lazyloaded" itemprop="contentUrl" data-cmp-hook-image="image" alt="Rinse dry ingredients" title="Rinse dry ingredients" src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_step2.jpg"/>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <hr/>
-                                            <li>
-                                                <div className="m-ordered-listing__item">
-                                                    <div className="m-ordered-listing__title">
-                                                        <div className="cmp-title">
-                                                            <h3 className="cmp-title__text">Boil the dry ingredients</h3>
-                                                        </div>
-                                                    </div>
-                                                    <div className="m-ordered-listing__copy">
-                                                        <div className="cmp-text">
-                                                            <ul>
-                                                                <li>Place the snow fungus, red dates and longans in a large pot.</li>
-                                                                <li>Add water and bring to a boil and then lower the heat to let it gently simmer for the next 20 mins. Cover with lid leaving a gap.</li>
-                                                                <li>After 20mins, add gingko nuts and continue simmering for 10mins.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <hr/>
-                                            <li>
-                                                <div className="m-ordered-listing__item">
-                                                    <div className="m-ordered-listing__title">
-                                                        <div className="cmp-title">
-                                                            <h3 className="cmp-title__text">Add sugar</h3>
-                                                        </div>
-                                                    </div>
-                                                    <div className="m-ordered-listing__copy">
-                                                        <div className="cmp-text">
-                                                            <ul>
-                                                                <li>Everything should be softened.&nbsp; If not, let it simmer a bit longer.</li>
-                                                                <li>Add rock sugar and stir until melt.</li>
-                                                                <li>Taste for sweetness, add more if preferred</li>
-                                                                <li>Then add goji berries and cook for another 5 mins and then turn off the heat.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div className="cmp-image" data-cmp-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_step3.jpg" data-title="Add sugar" itemscope="" itemtype="http://schema.org/ImageObject">
-                                                        <img data-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_step3.jpg" className="lazyload cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Add sugar" title="Add sugar"/>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <hr/>
+                                                    </li>
+                                                    <hr/>
+                                                </>
+                                            })}
                                         </ol>
                                     </div>
                                 </div>
@@ -606,11 +572,11 @@ export default class RecipeDetails extends Component {
                                     </div>
                                     <div className="m-recipe-arrange__copy">
                                         <div className="cmp-text">
-                                            <p>This dessert can be served warm or chilled.</p>
+                                            <p>{recipe.plateAndServeDescription}</p>
                                         </div>
                                     </div>
                                     <div className="cmp-image" data-cmp-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image1.jpg" data-title="Plate and Serve!" itemscope="" itemtype="http://schema.org/ImageObject">
-                                        <img data-src="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image1.jpg" data-srcset="/content/dam/afn/global/en/recipes/snow-fungus/AFN_snow_fungus_main_image1.jpg" className="lazyload cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Plate and Serve!" title="Plate and Serve!"/>
+                                        <img src={recipe.plateAndServeImage} className="lazyload cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Plate and Serve!" title="Plate and Serve!"/>
                                     </div>
                                 </div>
                             </div>
@@ -635,6 +601,9 @@ export default class RecipeDetails extends Component {
                                 </div>
                             </div>
                         </div>
+
+
+
                         <div className="categorytag aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--7 aem-GridColumn--offset--default--0">
                             <div className="category-tags-round">
                                 <div className="m-category-tags">
@@ -669,113 +638,12 @@ export default class RecipeDetails extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="recommendations aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--7 aem-GridColumn--offset--default--0">
-                        </div>
-                        <div className="gigyareview aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--7 aem-GridColumn--offset--default--0">
-                            <section className="o-ratings" id="recipe-ratings-reviews-container">
-                                <div className="cmp-title">
-                                    <h1 className="cmp-title__text">Reviews</h1>
-                                </div>
-                                <div id="recipe-ratings-reviews" data-rating="ratings-review-section" rating-categoryid="afn_ratings_reviews_default_configuration" rating-streamid="L2NvbnRlbnQvYWZuL2dsb2JhbC9lbi9yZWNpcGVzL2N1aXNpbmUvYXNpYW4tZGVzc2VydHMvc25vdy1mdW5ndXMtZGVzc2VydC5odG1s" rating-container="recipe-ratings-reviews" rating-cid="" rating-hidesharebuttons="true" gigid="showCommentsUI" className="gig-comments-container gig-comments-reviews" style="width: 500px;" data-version="2">
-                                    <div className="gig-comments-composebox gig-comment-replybox-open gig-composebox-open">
-                                        <div className="gig-composebox-error" role="alert" aria-atomic="true" aria-live="polite"></div>
-                                        <div className="gig-composebox-header">
-                                            <div className="gig-composebox-login" style="display: none;">
-                                                <div className="gig-composebox-social-login gig-comments-button" role="button" tabindex="0">
-                                                    Login
-                                                    <div className="gig-composebox-login-icon"></div>
-                                                    <div className="gig-composebox-login-drop-icon"></div>
-                                                </div>
-                                                <div className="gig-composebox-site-login" role="button" tabindex="0">Login</div>
-                                                <div className="gig-composebox-or" style="display: none;">Or</div>
-                                                <div className="gig-composebox-guest-login gig-comments-button" role="button" tabindex="0" style="display: none;">Guest</div>
-                                            </div>
-                                            <div className="gig-composebox-header-right">
-                                                <div className="gig-composebox-follow" aria-atomic="true" aria-live="polite" role="button" tabindex="0" style="display: none;"></div>
-                                                <div className="gig-composebox-close" role="button" tabindex="0"></div>
-                                            </div>
-                                            <div className="gig-composebox-header-left">
-                                                <div className="gig-composebox-title" style="display: none;"></div>
-                                                <div className="gig-composebox-logout" role="button" tabindex="0" style="display: none;">(<span>Logout</span>)</div>
-                                                <div className="gig-composebox-ratings">
-                                                    <div className="gig-composebox-rating gig-composebox-rating-_overall">
-                                                        <div className="gig-composebox-rating-title">Overall Rating:</div>
-                                                        <div className="gig-composebox-rating-value" data-dimension="_overall">
-                                                            <div data-value="1" className="gig-composebox-rating-star" role="button" tabindex="0"></div>
-                                                            <div data-value="2" className="gig-composebox-rating-star" role="button" tabindex="0"></div>
-                                                            <div data-value="3" className="gig-composebox-rating-star" role="button" tabindex="0"></div>
-                                                            <div data-value="4" className="gig-composebox-rating-star" role="button" tabindex="0"></div>
-                                                            <div data-value="5" className="gig-composebox-rating-star" role="button" tabindex="0"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="gig-composebox-photo" style=""><img className="gig-comment-img" alt="" src="https://cdns.au1.gigya.com/gs/i/comments2/Avatar_empty_x1.png" style="vertical-align: top; height: 37px;" aria-hidden="true"/></div>
-                                        <div className="gig-composebox-data">
-                                            <div className="gig-composebox-summary" style="display: none;"><input className="gig-composebox-summary-input gig-comments-placeholder" data-placeholder="Enter a title for your review" aria-label="Enter a title for your review"/></div>
-                                            <div className="gig-composebox-editor">
-                                                <ul className="gig-composebox-sidebar"></ul>
-                                                <div className="gig-composebox-textarea" contenteditable="true" role="textarea" aria-multiline="true" data-placeholder="Write your review" aria-label="Write your review" aria-required="true"></div>
-                                                <p></p>
-                                            </div>
-                                            <div className="gig-composebox-mediaItem"></div>
-                                            <div className="gig-composebox-footer">
-                                                <div className="gig-composebox-footer-right">
-                                                    <div className="gig-composebox-cancel gig-comments-button" role="button" tabindex="0" style="display: none;">Cancel</div>
-                                                    <div className="gig-composebox-post gig-comments-button" role="button" tabindex="0">Post</div>
-                                                </div>
-                                                <div className="gig-composebox-footer-left">
-                                                    <div className="gig-composebox-share">
-                                                        <div className="gig-composebox-share-text">Share:</div>
-                                                        <div className="gig-composebox-share-providers">
-                                                            <div className="gig-comments-share-provider gig-comments-share-provider-shown" data-provider="facebook" aria-label="Facebook" role="button" tabindex="0" style="background-image: url(&quot;https://cdns.au1.gigya.com/gs/i/comments2/shareToProviders/facebook_grey_x1.png&quot;);">
-                                                                <div className="gig-comments-share-provider-checkbox gig-comments-checkbox" data-provider="facebook"></div>
-                                                            </div>
-                                                            <div className="gig-comments-share-provider gig-comments-share-provider-shown" data-provider="twitter" aria-label="Twitter" role="button" tabindex="0" style="background-image: url(&quot;https://cdns.au1.gigya.com/gs/i/comments2/shareToProviders/twitter_grey_x1.png&quot;);">
-                                                                <div className="gig-comments-share-provider-checkbox gig-comments-checkbox" data-provider="twitter"></div>
-                                                            </div>
-                                                            <div className="gig-comments-share-provider" data-provider="linkedin" aria-label="LinkedIn" role="button" tabindex="0" style="background-image: url(&quot;https://cdns.au1.gigya.com/gs/i/comments2/shareToProviders/linkedin_grey_x1.png&quot;);">
-                                                                <div className="gig-comments-share-provider-checkbox gig-comments-checkbox" data-provider="linkedin"></div>
-                                                            </div>
-                                                            <div className="gig-comments-share-provider" data-provider="renren" aria-label="Renren" role="button" tabindex="0" style="background-image: url(&quot;https://cdns.au1.gigya.com/gs/i/comments2/shareToProviders/renren_grey_x1.png&quot;);">
-                                                                <div className="gig-comments-share-provider-checkbox gig-comments-checkbox" data-provider="renren"></div>
-                                                            </div>
-                                                            <div className="gig-comments-share-provider" data-provider="qq" aria-label="QQ" role="button" tabindex="0" style="background-image: url(&quot;https://cdns.au1.gigya.com/gs/i/comments2/shareToProviders/qq_grey_x1.png&quot;);">
-                                                                <div className="gig-comments-share-provider-checkbox gig-comments-checkbox" data-provider="qq"></div>
-                                                            </div>
-                                                            <div className="gig-comments-share-provider" data-provider="sina" aria-label="Sina" role="button" tabindex="0" style="background-image: url(&quot;https://cdns.au1.gigya.com/gs/i/comments2/shareToProviders/sina_grey_x1.png&quot;);">
-                                                                <div className="gig-comments-share-provider-checkbox gig-comments-checkbox" data-provider="sina"></div>
-                                                            </div>
-                                                            <div className="gig-comments-share-provider" data-provider="vkontakte" aria-label="VKontakte" role="button" tabindex="0" style="background-image: url(&quot;https://cdns.au1.gigya.com/gs/i/comments2/shareToProviders/vkontakte_grey_x1.png&quot;);">
-                                                                <div className="gig-comments-share-provider-checkbox gig-comments-checkbox" data-provider="vkontakte"></div>
-                                                            </div>
-                                                            <div className="gig-comments-share-more" data-provider="more" aria-label="Show more" role="button" tabindex="0"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="gig-comments-header">
-                                        <div className="gig-comments-header-left">
-                                            <div className="gig-comments-count"></div>
-                                        </div>
-                                        <ul className="gig-comments-header-right gig-comments-linksContainer" role="presentation">
-                                            <li className="gig-comments-sort" style="display: none;">Sort</li>
-                                            <li className="gig-comments-subscribe" title="Subscribe" role="button" tabindex="0" style="display: none;">Subscribe</li>
-                                            <li className="gig-comments-rss" style="display: none;"><a href="http://comments.au1.gigya.com/comments/rss/705845759098/afn_ratings_reviews_default_configuration/L2NvbnRlbnQvYWZuL2dsb2JhbC9lbi9yZWNpcGVzL2N1aXNpbmUvYXNpYW4tZGVzc2VydHMvc25vdy1mdW5ndXMtZGVzc2VydC5odG1s" role="button" tabindex="0">RSS</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="gig-comments-updates">
-                                        <div className="gig-comments-updates-text"></div>
-                                        <div className="gig-comments-updates-link"></div>
-                                    </div>
-                                    <div className="gig-comments-comments"></div>
-                                    <div className="gig-comments-more" role="button" tabindex="0" style="display: none;"></div>
-                                </div>
-                            </section>
-                        </div>
+
+
+                        
+                        
+
+                        
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ export default class AfnProvider extends Component {
     cleanTime: 0,
     steps : 0,
     numOfIngredients : 0,
-    instructions: {},
+    instructions: [],
     images: [],
     plateAndServeDescription: "",
     plateAndServeImage: ""

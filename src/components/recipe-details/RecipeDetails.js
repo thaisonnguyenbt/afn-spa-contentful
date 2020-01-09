@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { AfnContext } from "../Context";
-import IngredientTile from "./IngredientTile"
+import { AfnContext } from "../../Context";
+import IngredientList from "./IngredientList"
 
 export default class RecipeDetails extends Component {
     static contextType = AfnContext;
@@ -46,31 +46,9 @@ export default class RecipeDetails extends Component {
                                 </ol>
                             </nav>
                         </div>
+                        <IngredientList numOfPeopleToServe={recipe.numOfPeopleToServe} ingredients={recipe.ingredients} />
 
-
-
-                        <div className="recipeingredients aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0">
-                            <div className="col o-recipe__right desktop">
-                                <div className="m-sticky-container -sticky -active" data-sticky="sidebar">
-                                    <span className="col m-recipeDetailList">
-                                        <div className="cmp-title">
-                                            <h3 className="cmp-title__text">Ingredients</h3>
-                                        </div>
-                                        <ul>
-                                            <li className="m-recipeDetailList__item">
-                                                <strong>Serves {recipe.numOfPeopleToServe} people</strong>
-                                            </li>
-                                            
-                                            {recipe.ingredients && recipe.ingredients.map(item => {
-                                                return <li className="m-recipeDetailList__item">
-                                                    <p>{item}</p>
-                                                </li>
-                                            })} 
-                                        </ul>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        
 
 
                         <div className="recipeoverview aem-GridColumn--offset--medium--0 aem-GridColumn--small--none aem-GridColumn--medium--none aem-GridColumn--default--none aem-GridColumn--medium--12 aem-GridColumn aem-GridColumn--small--12 aem-GridColumn--offset--small--0 aem-GridColumn--default--7 aem-GridColumn--offset--default--0">
@@ -157,7 +135,7 @@ export default class RecipeDetails extends Component {
                                                 { recipe.healthy && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src={require('../images/icons/healthy.svg')}  alt="Healthy" />
+                                                        <img src={require('../../images/icons/healthy.svg')}  alt="Healthy" />
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>Healthy</span>
@@ -166,7 +144,7 @@ export default class RecipeDetails extends Component {
                                                 { recipe.noAlcohol && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src={require('../images/icons/no-alcohol.svg')} alt="No Alcohol" />
+                                                        <img src={require('../../images/icons/no-alcohol.svg')} alt="No Alcohol" />
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Alcohol</span>
@@ -175,7 +153,7 @@ export default class RecipeDetails extends Component {
                                                 { recipe.noMilk && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src={require('../images/icons/no-milk.svg')} alt="No Milk" />
+                                                        <img src={require('../../images/icons/no-milk.svg')} alt="No Milk" />
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Milk</span>
@@ -184,7 +162,7 @@ export default class RecipeDetails extends Component {
                                                 { recipe.noPork && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src={require('../images/icons/no-pork.svg')} alt="No Pork" />
+                                                        <img src={require('../../images/icons/no-pork.svg')} alt="No Pork" />
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Pork</span>
@@ -197,7 +175,7 @@ export default class RecipeDetails extends Component {
                                                 { recipe.healthy && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src={require('../images/icons/healthy.svg')} alt="Healthy"/>
+                                                        <img src={require('../../images/icons/healthy.svg')} alt="Healthy"/>
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>Healthy</span>
@@ -206,7 +184,7 @@ export default class RecipeDetails extends Component {
                                                 { recipe.noAlcohol && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src={require('../images/icons/no-alcohol.svg')} alt="No Alcohol"/>
+                                                        <img src={require('../../images/icons/no-alcohol.svg')} alt="No Alcohol"/>
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Alcohol</span>
@@ -215,7 +193,7 @@ export default class RecipeDetails extends Component {
                                                 { recipe.noMilk && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src={require('../images/icons/no-milk.svg')}  alt="No Milk"/>
+                                                        <img src={require('../../images/icons/no-milk.svg')}  alt="No Milk"/>
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Milk</span>
@@ -224,7 +202,7 @@ export default class RecipeDetails extends Component {
                                                 { recipe.noPork && 
                                                 <div className="col-6 col-md-4 col-lg-3 m-icon-text-listItem">
                                                     <div className="m-icon-text-listItem__img">
-                                                        <img src={require('../images/icons/no-pork.svg')}  alt="No Pork"/>
+                                                        <img src={require('../../images/icons/no-pork.svg')}  alt="No Pork"/>
                                                     </div>
                                                     <div className="m-icon-text-listItem__label">
                                                         <span>No Pork</span>
@@ -308,7 +286,7 @@ export default class RecipeDetails extends Component {
                                                                                             <tr>
                                                                                                 <td id="desktop1578471783767-reaction0-left" aria-hidden="true"></td>
                                                                                                 <td id="desktop1578471783767-reaction0-icon">
-                                                                                                    <img id="desktop1578471783767-reaction0-icon_img" src={require('../images/social-media/facebook-default.svg')} alt="" focusable="false"/>
+                                                                                                    <img id="desktop1578471783767-reaction0-icon_img" src={require('../../images/social-media/facebook-default.svg')} alt="" focusable="false"/>
                                                                                                 </td>
                                                                                                 <td id="desktop1578471783767-reaction0-right" aria-hidden="true"></td>
                                                                                             </tr>
@@ -324,7 +302,7 @@ export default class RecipeDetails extends Component {
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="desktop1578471783767-reaction1-left" aria-hidden="true"></td>
-                                                                                                <td id="desktop1578471783767-reaction1-icon"><img id="desktop1578471783767-reaction1-icon_img" src={require('../images/social-media/twitter-default.svg')} alt="" focusable="false"/></td>
+                                                                                                <td id="desktop1578471783767-reaction1-icon"><img id="desktop1578471783767-reaction1-icon_img" src={require('../../images/social-media/twitter-default.svg')} alt="" focusable="false"/></td>
                                                                                                 <td id="desktop1578471783767-reaction1-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -339,7 +317,7 @@ export default class RecipeDetails extends Component {
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="desktop1578471783767-reaction2-left" aria-hidden="true"></td>
-                                                                                                <td id="desktop1578471783767-reaction2-icon" ><img id="desktop1578471783767-reaction2-icon_img" src={require('../images/social-media/pinterest-default.svg')}  alt="" focusable="false"/></td>
+                                                                                                <td id="desktop1578471783767-reaction2-icon" ><img id="desktop1578471783767-reaction2-icon_img" src={require('../../images/social-media/pinterest-default.svg')}  alt="" focusable="false"/></td>
                                                                                                 <td id="desktop1578471783767-reaction2-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -354,7 +332,7 @@ export default class RecipeDetails extends Component {
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td id="desktop1578471783767-reaction3-left" aria-hidden="true"></td>
-                                                                                                <td id="desktop1578471783767-reaction3-icon" ><img id="desktop1578471783767-reaction3-icon_img" src={require('../images/social-media/whatsapp-default.svg')} alt="" focusable="false"/></td>
+                                                                                                <td id="desktop1578471783767-reaction3-icon" ><img id="desktop1578471783767-reaction3-icon_img" src={require('../../images/social-media/whatsapp-default.svg')} alt="" focusable="false"/></td>
                                                                                                 <td id="desktop1578471783767-reaction3-right" aria-hidden="true"></td>
                                                                                             </tr>
                                                                                         </tbody>

@@ -4,7 +4,7 @@ import { AfnContext } from "../Context";
 import Header from "../components/Header"
 import Container from "../components/Container"
 import Footer from "../components/Footer"
-import RecipeDetail from "../components/RecipeDetails"
+import RecipeDetail from "../components/recipe-details/RecipeDetails"
     
 export default class RecipeDetailPage extends Component {
     static contextType = AfnContext;

@@ -29,7 +29,7 @@ export default class AfnProvider extends Component {
 
   getData = async () => {
     try {
-      let response = await Client.getEntry("7d8eJUvyb36K1F3XzV7nOl");
+      let response = await Client.getEntry("2KyK2ozGjsdfVXiwfWSqX7");
       console.log(response);
       let recipe = this.formatData(response);
       console.log(recipe)

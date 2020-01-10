@@ -12,7 +12,9 @@ export default class Home extends Component {
             <div>
                 <Header />
                 <Container>
-                    <span>{recipe.title}</span>
+                    <a href="/recipes/123">
+                        <img src={require('../images/AFN_snow_fungus_main_image1.jpg')} alt={recipe.title}/>
+                    </a>
                 </Container>
                 <Footer />
             </div>

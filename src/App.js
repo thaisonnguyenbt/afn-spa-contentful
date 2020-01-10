@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import Home from "./pages/Home"
 import Recipes from "./pages/Recipes"
 import RecipeDetailPage from "./pages/RecipeDetailPage"
@@ -8,7 +7,7 @@ import './layouts/base.css'
 import './layouts/clientlib.css'
 import './layouts/all.css'
 
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (

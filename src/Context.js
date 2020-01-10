@@ -6,8 +6,7 @@ const AfnContext = React.createContext();
 
 export default class AfnProvider extends Component {
   state = {
-    numOfPeopleToServe: 0,
-    numOfPeopleToServe: [],
+    numOfPeopleToServe: 0,  
     recipeCreator: "",
     title: "",
     description: "",
